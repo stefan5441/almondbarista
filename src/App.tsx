@@ -33,7 +33,7 @@ function App() {
 
     const index = type === "next" ? currEntryIndex + 1 : currEntryIndex - 1;
 
-    if (index === entries.length - 1) {
+    if (index === entries.length) {
       setCurrentEntry(undefined);
       return;
     }
@@ -57,6 +57,10 @@ function App() {
 
     if (currentEntry === undefined) {
       return type === "prev";
+    }
+
+    if (new Date(currentEntry.timestamp).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) && type === "next") {
+      return false;
     }
 
     const currEntryIndex = currentEntry
