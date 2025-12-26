@@ -27,9 +27,7 @@ function App() {
   }, []);
 
   const handleNavBtnClick = (type: "prev" | "next") => {
-    const currEntryIndex = currentEntry
-      ? entries.findIndex((entry) => entry.id === currentEntry.id)
-      : entries.length - 1;
+    const currEntryIndex = currentEntry ? entries.findIndex((entry) => entry.id === currentEntry.id) : entries.length;
 
     const index = type === "next" ? currEntryIndex + 1 : currEntryIndex - 1;
 
@@ -46,6 +44,7 @@ function App() {
 
     const updatedEntries = await getAllEntries();
     setEntries(updatedEntries);
+    setCurrentEntry(updatedEntries[updatedEntries.length - 1]);
 
     setText("");
   };
