@@ -1,42 +1,23 @@
 .textbox,
 .btn {
-  box-sizing: border-box;
   all: unset;
+  box-sizing: border-box;
   font-size: 18px;
   width: 100%;
   box-sizing: border-box;
-  border: 1px solid #a1a1aa;
   border-radius: 4px;
-}
-
-.textbox:hover,
-.textbox:focus,
-.btn:hover {
-  border-color: #38bdf8;
+  background-color: var(--bg-light-color);
+  color: var(--bg-color);
 }
 
 .textbox:disabled {
-  background-color: #f5f5f5;
-  border-color: #d4d4d8;
+  background-color: var(--bg-light-color);
   color: inherit;
-  cursor: default;
-}
-
-.btn:disabled {
-  background-color: #f5f5f5;
-  color: #d4d4d8;
-  border-color: #d4d4d8;
   cursor: default;
 }
 
 .noteNumber {
   margin: 0 6px;
-}
-
-.btn {
-  width: auto;
-  cursor: pointer;
-  padding: 4px 8px;
 }
 
 .textbox {
@@ -57,6 +38,7 @@
 }
 
 .box {
+  margin: 24px 32px;
   width: 640px;
   display: flex;
   flex-direction: column;
@@ -68,4 +50,21 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.header {
+  background-color: #f5f5f5;
+  padding: 0 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.header-left,
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }

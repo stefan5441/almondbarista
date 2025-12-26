@@ -1,3 +1,10 @@
+:root {
+  --text-color: #fff;
+  --bg-color: #262727;
+  --bg-light-color: #665957;
+  --primary-color: #f0d3c9;
+}
+
 *,
 *::before,
 *::after {
@@ -13,6 +20,8 @@ html,
 body,
 #root {
   height: 100%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 body {

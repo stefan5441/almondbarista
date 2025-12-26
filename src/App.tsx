@@ -2,6 +2,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { addEntry, type Entry, getAllEntries } from "./db";
 import { convertTimestampToDate } from "./utils";
+import { SettingsButton } from "./components/SettingsButton";
 
 function App() {
   const [text, setText] = useState<string>("");
@@ -75,6 +76,15 @@ function App() {
   return (
     <div className="container">
       <div className="box">
+        <div className="header">
+          <div className="header-left">
+            <img src="/favicon-32x32.png" alt="logo" width={24} height={24} />
+            <p>almondbarista</p>
+          </div>
+          <div className="header-right">
+            <SettingsButton />
+          </div>
+        </div>
         <h1>What's on your mind today?</h1>
 
         <textarea
