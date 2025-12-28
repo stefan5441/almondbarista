@@ -1,19 +1,23 @@
 .btn {
-  all: unset;
   box-sizing: border-box;
   font-size: 18px;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 4px;
-  background-color: var(--bg-light-color);
-  color: var(--bg-color);
   width: auto;
+  border: none;
+  background-color: transparent;
   cursor: pointer;
   padding: 4px 8px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  color: var(--btn-color);
+}
+
+.btn:hover:not(:disabled) {
+  color: var(--btn-hover-color);
 }
 
 .btn:disabled {
-  background-color: var(--bg-color);
-  color: #d4d4d8;
+  color: var(--btn-disabled-color);
   cursor: default;
 }

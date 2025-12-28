@@ -14,16 +14,6 @@ export class AlmondBaristaDB extends Dexie {
     this.version(1).stores({
       entries: "++id, timestamp",
     });
-
-    this.on("populate", async () => {
-      await this.entries.bulkAdd([
-        { content: "Demo entry 1", timestamp: new Date("2025-12-20T09:00:00").getTime() },
-        { content: "Demo entry 2", timestamp: new Date("2025-12-21T10:30:00").getTime() },
-        { content: "Demo entry 3", timestamp: new Date("2025-12-22T14:15:00").getTime() },
-        { content: "Demo entry 4", timestamp: new Date("2025-12-23T16:45:00").getTime() },
-        { content: "Demo entry 5", timestamp: new Date("2025-12-24T20:00:00").getTime() },
-      ]);
-    });
   }
 }
 
@@ -35,4 +25,11 @@ export const addEntry = async (entry: Omit<Entry, "id">) => {
 
 export const getAllEntries = async (): Promise<Entry[]> => {
   return await db.entries.toArray();
+};
+
+export const replaceAllEntries = async (entries: Entry[]) => {
+  await db.transaction("rw", db.entries, async () => {
+    await db.entries.clear();
+    await db.entries.bulkAdd(entries);
+  });
 };

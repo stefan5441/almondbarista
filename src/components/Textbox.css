@@ -1,0 +1,14 @@
+.textbox {
+  all: unset;
+  box-sizing: border-box;
+  font-size: 18px;
+  width: 100%;
+  border-radius: 4px;
+  padding: 4px 8px;
+  background-color: var(--textbox-color);
+}
+
+.textbox:disabled {
+  cursor: default;
+  background-color: var(--textbox-disabled-color);
+}

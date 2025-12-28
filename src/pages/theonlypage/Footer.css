@@ -1,0 +1,21 @@
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footer-btns {
+  display: flex;
+}
+
+.date-navigation {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 4px;
+}
+
+.note-number {
+  justify-self: center;
+  white-space: nowrap;
+}
