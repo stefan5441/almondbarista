@@ -66,24 +66,17 @@ export const Footer = ({
   };
 
   const isNavBtnEnabled = (type: "prev" | "next") => {
-    if (entries.length === 0) {
-      return false;
+    if (entries.length === 0) return false;
+
+    if (type === "prev") {
+      if (currentEntry === undefined) return true;
+      const currEntryIndex = entries.findIndex((entry) => entry.id === currentEntry.id);
+      return currEntryIndex !== 0;
     }
 
-    if (currentEntry === undefined) {
-      return type === "prev";
+    if (type === "next") {
+      return currentEntry !== undefined;
     }
-
-    if (new Date(currentEntry.timestamp).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0) && type === "next") {
-      return false;
-    }
-
-    const currEntryIndex = currentEntry
-      ? entries.findIndex((entry) => entry.id === currentEntry.id)
-      : entries.length - 1;
-
-    if (type === "prev" && currEntryIndex === 0) return false;
-    return true;
   };
 
   const date = convertTimestampToDate(currentEntry ? currentEntry.timestamp : new Date().getTime());
@@ -130,7 +123,7 @@ export const Footer = ({
               setTimeout(() => setError(""), 3000);
             }
           }}
-        />{" "}
+        />
       </div>
       <div className="date-navigation">
         <Button icon={faChevronLeft} onClick={() => handleNavBtnClick("prev")} disabled={!isNavBtnEnabled("prev")} />

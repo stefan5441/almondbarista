@@ -1,22 +1,19 @@
-import { getAllEntries, replaceAllEntries, type Entry } from "../../db";
+import { getAllEntries, addEntries, type Entry } from "../../db";
 
 export const fetchAndSetCurrentEntry = async (
   setEntries: (entries: Entry[]) => void,
-  setCurrentEntry: (entry: Entry | undefined) => void
+  setCurrentEntry: (entry: Entry | undefined) => void,
 ) => {
   const res = await getAllEntries();
-  setEntries(res);
+  const sortedEntries = res.sort((a, b) => a.timestamp - b.timestamp);
+  setEntries(sortedEntries);
 
-  const lastEntry = res[res.length - 1];
-  if (!lastEntry) {
-    setCurrentEntry(undefined);
-    return;
-  }
+  const todaysEntries = sortedEntries.filter(
+    (entry) => new Date(entry.timestamp).setHours(0, 0, 0, 0) === new Date().setHours(0, 0, 0, 0),
+  );
 
-  const lastEntryDate = new Date(lastEntry.timestamp).setHours(0, 0, 0, 0);
-  const currDate = new Date().setHours(0, 0, 0, 0);
-
-  setCurrentEntry(lastEntryDate === currDate ? lastEntry : undefined);
+  const lastEntry = todaysEntries[todaysEntries.length - 1];
+  setCurrentEntry(lastEntry);
 };
 
 export const handleUploadData = async (file: File): Promise<boolean> => {
@@ -25,10 +22,19 @@ export const handleUploadData = async (file: File): Promise<boolean> => {
     const data: unknown = JSON.parse(text);
     if (!Array.isArray(data)) return false;
 
+    const currentEntries = await getAllEntries();
+
     const entries: Entry[] = [];
     for (const item of data) {
       if (typeof item.content !== "string" || typeof item.timestamp !== "number") {
         return false;
+      }
+
+      const isDuplicate = currentEntries.some(
+        (entry) => entry.timestamp === item.timestamp && entry.content.trim() === item.content.trim(),
+      );
+      if (isDuplicate) {
+        continue;
       }
 
       entries.push({
@@ -38,7 +44,7 @@ export const handleUploadData = async (file: File): Promise<boolean> => {
       });
     }
 
-    await replaceAllEntries(entries);
+    await addEntries(entries);
     return true;
   } catch {
     return false;

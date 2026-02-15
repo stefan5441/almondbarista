@@ -1,6 +1,6 @@
 # almondbarista
 
-A simple, minimalist diary app for daily entries. Your data stays private, saved locally in your browser.
+A simple, minimalist diary app. Your data stays private, saved locally in your browser.
 
 ## 🌐 Live Demo
 
@@ -10,7 +10,7 @@ Visit the application at: [https://almondbarista.netlify.app/](https://almondbar
 
 The project features include
 
-- **Daily input** - Enter and save your daily thoughts in a text box
+- **Daily input** - Enter and save your thoughts in a text box
 - **History overview** - Browse and navigate through previous entries
 - **Local storage** - All data is stored locally in your browser using IndexedDB
 - **Data transfer** - Easily transfer data between browsers with the "download data" and "upload data" buttons

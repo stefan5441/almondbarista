@@ -23,13 +23,10 @@ export const addEntry = async (entry: Omit<Entry, "id">) => {
   await db.entries.put(entry);
 };
 
-export const getAllEntries = async (): Promise<Entry[]> => {
-  return await db.entries.toArray();
+export const addEntries = async (entries: Entry[]) => {
+  await db.entries.bulkAdd(entries);
 };
 
-export const replaceAllEntries = async (entries: Entry[]) => {
-  await db.transaction("rw", db.entries, async () => {
-    await db.entries.clear();
-    await db.entries.bulkAdd(entries);
-  });
+export const getAllEntries = async (): Promise<Entry[]> => {
+  return await db.entries.toArray();
 };
